@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+  
+<hibernate-configuration>  
+  
+    <session-factory>  
+        <property name="hbm2ddl.auto">update</property>  
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>  
+        <property name="connection.url">jdbc:mysql://localhost:3306/person_tel</property>  
+        <property name="connection.username">root1</property>  
+        <property name="connection.password">localhost</property>  
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>  
+    
+    <mapping class="logic.Person"/>  
+    
+    </session-factory>  
+  
+</hibernate-configuration> 
