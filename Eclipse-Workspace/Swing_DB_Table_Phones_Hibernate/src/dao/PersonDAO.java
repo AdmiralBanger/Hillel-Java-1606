@@ -1,0 +1,105 @@
+package dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import logic.*;
+
+public class PersonDAO implements PersonInterface
+{
+	Configuration cfg;
+	SessionFactory factory;
+	
+	public PersonDAO()
+	{
+		cfg = new Configuration();
+		cfg.configure("hibernate.cfg.xml");
+		factory = cfg.buildSessionFactory();
+	}
+	
+	@Override
+	public void create(Person p) 
+	{
+		Session session = factory.openSession();  
+		session.beginTransaction();
+		session.save(p);
+		session.getTransaction().commit();
+		session.close();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public ArrayList<Person> read()
+	{
+		Session session = factory.openSession();
+		List<Person> persons = new ArrayList<Person>();
+		List<Phone> phones;
+		
+		session.beginTransaction();
+		persons = session.createQuery("from Person").getResultList();
+		session.flush();
+		
+		for (Person p : persons)
+		{
+			phones = session.createQuery("from Phone WHERE person_id = " + p.id).getResultList();
+			p.phones = (ArrayList<Phone>) phones;
+			session.flush();
+		}
+		
+		session.close();
+		return (ArrayList<Person>) persons;
+	}
+
+	@Override
+	public void update(Person p)
+	{
+		Session session = factory.openSession();  
+		session.beginTransaction();
+        session.update(p);
+        session.getTransaction().commit();
+		session.close();
+	}
+
+	@Override
+	public void delete(int id) 
+	{
+		Session session = factory.openSession();  
+		session.beginTransaction();
+        Person p = (Person) session.load(Person.class, id);
+        session.delete(p);
+        session.getTransaction().commit();
+		session.close();
+	}
+
+	public void createPhone(Phone p)
+	{
+		Session session = factory.openSession();  
+		session.beginTransaction();
+		session.save(p);
+		session.getTransaction().commit();
+		session.close();
+	}
+	
+	public void deletePhone(int phone_id)
+	{
+		Session session = factory.openSession();  
+		session.beginTransaction();
+        Phone p = (Phone) session.load(Phone.class, phone_id);
+        session.delete(p);
+        session.getTransaction().commit();
+		session.close();
+	}
+	
+	public void updatePhone(Phone p)
+	{
+		Session session = factory.openSession();  
+		session.beginTransaction();
+        session.update(p);
+        session.getTransaction().commit();
+		session.close();
+	}
+}
