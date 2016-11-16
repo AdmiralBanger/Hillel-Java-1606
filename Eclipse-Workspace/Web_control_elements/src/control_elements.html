@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Элементы управления</title>
+</head>
+<body>
+	<pre>
+	button			<input type="button" value="Button"><br>
+	checkbox		<input type="checkbox"><br>
+	file			<input type="file"><br>
+	hidden			<input type="hidden"><br>
+	image			<input type="image"><br>
+	password		<input type="password"><br>
+	radio			<input type="radio" name="rad"><label>Radio 1</label><input type="radio" name="rad" value="Radio 2"><label>Radio 2</label><br>
+	reset			<input type="reset"><br>
+	submit			<input type="submit"><br>
+	text			<input type="text"><br>
+	color			<input type="color"><br>
+	date			<input type="date"><br>
+	datetime		<input type="datetime"><br>
+	datetime-local		<input type="datetime-local"><br>
+	email			<input type="email"><br>
+	number			<input type="number"><br>
+	range			<input type="range" min="0" max="10" step="1" id="rng" onChange="slider()"> <input type="text" id="lbl"><br>
+	search			<input type="search"><br>
+	tel			<input type="tel"><br>
+	time			<input type="time"><br>
+	url			<input type="url"><br>
+	month			<input type="month"><br>
+	week			<input type="week"><br>
+	textarea		<textarea></textarea>
+	</pre>
+	<script>
+		function slider()
+		{
+			var temp = parseInt(rng.value);
+			lbl.value = temp;
+		}
+	</script>
+</body>
+</html>
