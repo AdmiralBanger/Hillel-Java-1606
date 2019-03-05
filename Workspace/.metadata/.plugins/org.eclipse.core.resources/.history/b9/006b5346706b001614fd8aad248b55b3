@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Table</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript">
+		var op = '';
+        
+        function sentRequest(op)
+        {
+            var id = idField.value;
+            var first_name = fField.value;
+            var last_name = lField.value;
+            var age   = ageField.value;
+			var street_id = streetField.value;
+			var oper = op;
+            
+			var data = "oper=" + op + "&id=" + id + "&first_name=" + first_name 
+						+ "&last_name" + last_name + "&age=" + age + "&street_id=" + street_id;
+            var xhr = new XMLHttpRequest();
+		
+        	xhr.open("POST", "PersonServlet", false);
+			xhr.setRequestHeader("Content-type", "text/html");
+			xhr.send(data);
+			if (xhr.readyState == 4 && xhr.status == 200)
+            {
+               	table.tBodies[0].innerHTML = xhr.responseText;
+            }
+			else
+			{
+				alert(xhr.status + ": " + xhr.statusText);
+			}
+        }
+	</script>
+</head>
+<body>
+<table id="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+			<th>Age</th>
+			<th>Street name</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+	</tbody>
+</table>
+
+<form>
+   	<input id="idField" value="ID" />
+   	<input id="fField" value="First Name" />
+   	<input id="lField" value="Last Name" />
+   	<input id="ageField" value="Age" />
+   	<input id="streetField" value="Street name" />
+   	<br>
+   	<input type="button" value="create" onClick="sentRequest('c')" />
+   	<input type="button" value="read"   onClick="sentRequest('r')" />
+   	<input type="button" value="update" onClick="sentRequest('u')" />
+   	<input type="button" value="delete" onClick="sentRequest('d')" />
+</form>
+</body>
+</html>
+

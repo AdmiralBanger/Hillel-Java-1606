@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;PersonDAO_Mock.java&apos; to &apos;Swing_DB_Table_Phones/src/dao&apos;&#x0D;&#x0A;- Original project: &apos;Swing_DB_Table_Server_Server&apos;&#x0D;&#x0A;- Destination element: &apos;Swing_DB_Table_Phones/src/dao&apos;&#x0D;&#x0A;- Original element: &apos;dao.PersonDAO_Mock.java&apos;" description="Copy compilation unit" destination="=Swing_DB_Table_Phones/src&lt;dao" element1="/src&lt;dao{PersonDAO_Mock.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1473693262930" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,42 @@
+package testCalc;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class testCalc 
+{
+
+	@Test
+	public void test_plus()
+	{
+		WebDriver drv=new FirefoxDriver();
+		drv.get("file:///D:/JavaScript/calculator2.html");
+		drv.findElement(By.name("btnOne")).click();
+		drv.findElement(By.name("btnPlus")).click();
+		drv.findElement(By.name("btnThree")).click();
+		drv.findElement(By.name("btnEquals")).click();
+		String str=drv.findElement(By.name("ReadOut")).getAttribute("value");
+		assertEquals("4", str);
+		drv.close();
+	}
+	
+	@Test
+	public void test_minus()
+	{
+		System.setProperty("webdriver.chrome.driver", "D:/JavaScript/chromedriver_win32/chromedriver.exe");
+		WebDriver drv=new ChromeDriver();
+		drv.get("file:///D:/JavaScript/calculator2.html");
+		drv.findElement(By.name("btnOne")).click();
+		drv.findElement(By.name("btnPlus")).click();
+		drv.findElement(By.name("btnThree")).click();
+		drv.findElement(By.name("btnEquals")).click();
+		String str=drv.findElement(By.name("ReadOut")).getAttribute("value");
+		assertEquals("4", str);
+		drv.close();
+	}	
+}

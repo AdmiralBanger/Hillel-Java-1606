@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<script>
+		function calc()
+		{
+			var data = "aNum="+aNum.value+"&bNum="+bNum.value+"&op=";
+			if (op.value == '+')
+			{
+				data = data + "plus";
+			}
+			else
+			{
+				data = data + op.value;
+			}
+			
+			//POST:
+			//var xhr = new XMLHttpRequest();
+			//xhr.open('POST', 'calcPOST.php', false);
+			//xhr.setRequestHeader("Content-type", "blablabla");
+			//xhr.send(data);
+			
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', 'calc.php?'+data, false);
+			xhr.send();
+			if (xhr.status != 200) 
+			{
+  				alert( xhr.status + ': ' + xhr.statusText );
+  			} 
+  			else 
+  			{
+  				output.value = xhr.responseText;
+			}
+		}
+	</script>
+</head>
+<body>
+	<form method="get">
+		<input id="aNum"><p>
+		<input id="op"><p>
+		<input id="bNum"><p>
+		<input id="output"><p>
+		<input type="button" value="Calculate" onClick="calc()"/>
+	</form>
+</body>
+</html>

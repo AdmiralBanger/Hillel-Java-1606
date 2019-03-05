@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 3 elements to &apos;Swing_DB_Table_Server_Client/src/gui&apos;&#x0D;&#x0A;- Original project: &apos;Swing_DB_Table_Editable&apos;&#x0D;&#x0A;- Destination element: &apos;Swing_DB_Table_Server_Client/src/gui&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     gui.TFrame.java&#x0D;&#x0A;     gui.TMain.java&#x0D;&#x0A;     gui.TPanel.java" description="Copy compilation units" destination="=Swing_DB_Table_Server_Client/src&lt;gui" element1="/src&lt;gui{TFrame.java" element2="/src&lt;gui{TMain.java" element3="/src&lt;gui{TPanel.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1473011000593" units="3" version="1.0"/>
+</session>

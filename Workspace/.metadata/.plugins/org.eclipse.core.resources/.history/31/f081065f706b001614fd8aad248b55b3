@@ -1,0 +1,152 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
+
+@SuppressWarnings("serial")
+public class PersonServlet extends HttpServlet
+{
+	public static void registerDrivers()
+    {
+    	try 
+    	{
+    		Class.forName("com.mysql.jdbc.Driver");
+		} 
+    	catch (ClassNotFoundException e) 
+    	{
+			e.printStackTrace();
+		}
+    }
+	
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException
+	{
+		doGet( req, resp );
+	}
+	
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException
+	{
+		String res = "";
+		char op = req.getParameter("oper").charAt(0);
+		resp.setHeader("Content-Type", "text/html");
+		resp.setContentType("text/html;charset=utf-8");
+		
+		switch (op)
+		{
+			case 'c': create(req); break;
+			case 'r': res = read(req); break;
+			case 'u': update(req); break;
+			case 'd': delete(req); break;
+		}
+		
+		PrintWriter pw = resp.getWriter();
+		pw.println(res);
+	}
+	
+	private void create(HttpServletRequest req)
+	{
+		try 
+		{
+			Context context = new InitialContext();
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/person");
+			Statement stmt = dataSource.getConnection().createStatement();
+			
+			int 	id 			= Integer.parseInt(req.getParameter("id"));
+			String 	first_name 	= req.getParameter("first_name");
+			String 	last_name 	= req.getParameter("last_name");
+			int 	age 		= Integer.parseInt(req.getParameter("age"));
+			int 	street_id 	= Integer.parseInt(req.getParameter("street_id"));
+			
+			stmt.executeUpdate("INSERT INTO Person VALUES (" + id + ", \"" + first_name + "\", \"" + last_name + "\", " + age + ", " + street_id + ")");
+			
+			stmt.close();
+			context.close();
+		} 
+		catch (NamingException | SQLException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private String read(HttpServletRequest req)
+	{
+		String res = "";
+		
+		try 
+		{
+			Context context = new InitialContext();
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/person");
+			Statement stmt = dataSource.getConnection().createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT * from Person");
+			
+			while (rs.next())
+			{
+				res += "<tr><td>" + rs.getString(1) + "</td><td>" + rs.getString(2) + "</td><td>" + rs.getString(3)
+							+ "</td><td>" + rs.getString(4) + "</td><td>" + rs.getString(5) + "</td></tr>";
+			}
+			
+			return res;
+		} 
+		catch (NamingException | SQLException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
+	
+	private void update(HttpServletRequest req)
+	{
+		try 
+		{
+			Context context = new InitialContext();
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/person");
+			Statement stmt = dataSource.getConnection().createStatement();
+			
+			int 	id 			= Integer.parseInt(req.getParameter("id"));
+			String 	first_name 	= req.getParameter("first_name");
+			String 	last_name 	= req.getParameter("last_name");
+			int 	age 		= Integer.parseInt(req.getParameter("age"));
+			int 	street_id 	= Integer.parseInt(req.getParameter("street_id"));
+			
+			stmt.executeUpdate("UPDATE Person SET first_name=\"" + first_name + "\", last_name=\"" + last_name + "\", age=" + age + ", street_id=" + street_id + " WHERE id=" + id);
+			
+			stmt.close();
+			context.close();
+		} 
+		catch (NamingException | SQLException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private void delete(HttpServletRequest req)
+	{
+		try 
+		{
+			Context context = new InitialContext();
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/person");
+			Statement stmt = dataSource.getConnection().createStatement();
+			
+			int 	id 			= Integer.parseInt(req.getParameter("id"));
+			
+			stmt.executeUpdate("DELETE from Person WHERE id=" + id);
+			
+			stmt.close();
+			context.close();
+		} 
+		catch (NamingException | SQLException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+}

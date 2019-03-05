@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Table</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css.css">
+<script type="text/javascript">
+	function save()
+	{
+		var table = document.getElementById("table");
+		for (var i = 0; i < table.tBodies[0].rows.length; i++)
+		{
+			var temp = [];
+			temp[0] = table.tBodies[0].rows[i].cells[0].innerHTML;
+			temp[1] = table.tBodies[0].rows[i].cells[1].innerHTML;
+			temp[2] = table.tBodies[0].rows[i].cells[2].innerHTML;
+			temp[3] = table.tBodies[0].rows[i].cells[3].innerHTML;
+			temp[4] = table.tBodies[0].rows[i].cells[4].innerHTML;
+			localStorage["Person " + i] = temp;
+		}
+	}
+	function load()
+	{
+		var table = document.getElementById("table2");
+		var table1 = document.getElementById("table");
+		for (var i = 0; i < table1.tBodies[0].rows.length; i++)
+		{
+			var row = table.tBodies[0].insertRow(table.tBodies[0].rows.length);
+			var temp = localStorage[("Person " + i)];
+			var str = temp.split(',');
+			for (var j = 0; j < 5; j++)
+			{
+				var cell = row.insertCell(j);
+				cell.innerHTML = str[j];
+			}
+		}
+	}
+	function clearLS()
+	{
+		localStorage.clear();
+	}
+	function insert(where)
+	{
+		var table = document.getElementById("table");
+		var str = [];
+		str[0] = document.getElementById("idField").value;
+		str[1] = document.getElementById("fField").value;
+		str[2] = document.getElementById("lField").value;
+		str[3] = document.getElementById("ageField").value;
+		str[4] = document.getElementById("streetField").value;
+		if (where == "start")
+		{
+			var row = table.tBodies[0].insertRow(0);
+			for (var i = 0; i < 5; i++)
+			{
+				var cell = row.insertCell(i);
+				cell.innerHTML = str[i];
+			}
+		}
+		else if (where == "middle")
+		{
+			var dx = (table.tBodies[0].rows.length % 2 == 0) ? 0 : 1;
+			var row = table.tBodies[0].insertRow(table.tBodies[0].rows.length / 2 + dx);
+			for (var i = 0; i < 5; i++)
+			{
+				var cell = row.insertCell(i);
+				cell.innerHTML = str[i];
+			}
+		}
+		else if (where == "end")
+		{
+			var dx = table.tBodies[0].rows.length;
+			var row = table.tBodies[0].insertRow(dx);
+			for (var i = 0; i < 5; i++)
+			{
+				var cell = row.insertCell(i);
+				cell.innerHTML = str[i];
+			}
+		}
+	}
+	function deleteRow(where)
+	{
+		var table = document.getElementById("table");
+		if (where == "start")
+		{
+			table.tBodies[0].deleteRow(0);
+		}
+		else if (where == "middle")
+		{
+			var dx = (table.tBodies[0].rows.length % 2 == 0) ? 0 : 1;
+			table.tBodies[0].deleteRow(table.tBodies[0].rows.length / 2 + dx);
+		}
+		else if (where == "end")
+		{
+			var dx = table.tBodies[0].rows.length;
+			table.tBodies[0].deleteRow(dx - 1);
+		}
+	}
+</script>
+</head>
+<body>
+<table id="table" contenteditable="true">
+	<thead>
+	<tr>
+		<th>ID</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Age</th>
+		<th>Street ID</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>0</td>
+		<td>Ivan</td>
+		<td>Ivanov</td>
+		<td>15</td>
+		<td>1</td>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>Ovan</td>
+		<td>Ovanov</td>
+		<td>17</td>
+		<td>4</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>Yavan</td>
+		<td>Yavanov</td>
+		<td>19</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>2</td>
+		<td>3</td>
+		<td>4</td>
+		<td>5</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>Uvan</td>
+		<td>Uvanov</td>
+		<td>23</td>
+		<td>0</td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>First Name</td>
+		<td>Last Name</td>
+		<td>12</td>
+		<td>3</td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td>ssj</td>
+		<td>hrh</td>
+		<td>12</td>
+		<td>12</td>
+	</tr>
+	</tbody>
+	<tfoot>
+	<tr>
+		<td colspan="5">
+			<input type="text" id="idField" value="ID" />
+			<input type="text" id="fField" value="First Name" />
+			<input type="text" id="lField" value="Last Name" />
+			<input type="text" id="ageField" value="Age" />
+			<input type="text" id="streetField" value="Street ID" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5">
+			<input type="button" value="Insert Start" onClick="insert('start')" />
+			<input type="button" value="Insert Middle" onClick="insert('middle')" />
+			<input type="button" value="Insert End" onClick="insert('end')" />
+			<input type="button" value="Delete Start" onClick="deleteRow('start')" />
+			<input type="button" value="Delete Middle" onClick="deleteRow('middle')" />
+			<input type="button" value="Delete End" onClick="deleteRow('end')" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5">
+			<input type="button" value="Save" onClick="save()" />
+			<input type="button" value="Load" onClick="load()" />
+			<input type="button" value="Clear" onClick="clearLS()" />
+		</td>
+	</tr>
+	</tfoot>
+</table>
+</br>
+<table id="table2">
+	<thead>
+	<tr>
+		<th>ID</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Age</th>
+		<th>Street ID</th>
+	</tr>
+	</thead>
+	<tbody>
+	</tbody>
+</table>
+</body>
+</html>
+

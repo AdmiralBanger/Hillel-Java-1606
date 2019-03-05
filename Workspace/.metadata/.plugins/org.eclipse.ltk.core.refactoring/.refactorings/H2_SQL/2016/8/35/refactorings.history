@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;h2-1.4.192.jar&apos; to &apos;Libs&apos;&#x0D;&#x0A;- Original project: &apos;H2_SQL&apos;&#x0D;&#x0A;- Destination element: &apos;Libs&apos;&#x0D;&#x0A;- Original element: &apos;h2-1.4.192.jar&apos;" description="Copy file" element1="Libs/h2-1.4.192.jar" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1472124106935" target="/Tomcat_DB_Table/Libs" units="0" version="1.0"/>
+</session>

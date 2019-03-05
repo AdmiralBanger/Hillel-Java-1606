@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+<script src="calc.js"></script>
+</head>
+<body>
+	<form name="calc" action="">
+		<table bgcolor=#eeeeee width="150px">
+			<tr align="center">
+				<td colspan="4" rowspan="2"><input id="editWide" name="ReadOut"
+					type="Text" size=28 value="0" width="220px"></td>
+			</tr>
+			<tr align="center">
+
+			</tr>
+			<tr align="center">
+				<td><input type="button" name="btnOne" value="1"
+					onclick="NumPressed(1)"></td>
+				<td><input type="button" name="btnTwo" value="2"
+					onclick="NumPressed(2)"></td>
+				<td><input type="button" name="btnThree" value="3"
+					onclick="NumPressed(3)"></td>
+				<td><input type="button" name="btnPlus" value=" + "
+					onclick="Operation('+')"></td>
+
+			</tr>
+			<tr align="center">
+				<td><input type="button" name="btnFour" value="4"
+					onclick="NumPressed(4)"></td>
+				<td><input type="button" name="btnFive" value="5"
+					onclick="NumPressed(5)"></td>
+				<td><input type="button" name="btnSix" value="6"
+					onclick="NumPressed(6)"></td>
+				<td><input type="button" name="btnMinus" value=" - "
+					onclick="Operation('-')"></td>
+
+			</tr>
+			<tr align="center">
+				<td><input type="button" name="btnSeven" value="7"
+					onclick="NumPressed(7)"></td>
+				<td><input type="button" name="btnEight" value="8"
+					onclick="NumPressed(8)"></td>
+				<td><input type="button" name="btnNine" value="9"
+					onclick="NumPressed(9)"></td>
+				<td><input type="button" name="btnMultiple" value=" * "
+					onclick="Operation('*')"></td>
+			</tr>
+			<tr align="center">
+				<td></td>
+				<td><input type="button" name="btnZero" value="0"
+					onclick="NumPressed(0)"></td>
+				<td><input type="button" name="btnEquals" value="="
+					onclick="calculation()"></td>
+				<td><input type="button" name="btnDivide" value=" / "
+					onclick="Operation('/')"></td>
+			</tr>
+		</table>
+	</form>
+
+	<script>
+		var first_n = 0;
+		var second_n = 0;
+		var op = '+';
+		editWide.value = "";
+
+		function NumPressed(Num) {
+			editWide.value += Num;
+		}
+
+		function Operation(Op) {
+			first_n = parseInt(editWide.value);
+			op = Op;
+			editWide.value = "";
+		}
+
+		function calculation() {
+			second_n = parseInt(editWide.value);
+			editWide.value = calc(first_n, second_n, op);
+		}
+	</script>
+
+</body>
+</html>
+

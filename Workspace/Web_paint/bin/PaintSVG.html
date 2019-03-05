@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Paint SVG</title>
+<script>
+function init() 
+{ 
+
+	var tablet = document.getElementById('tablet'); 
+	var svg = document.getElementById('Ssvg'); 
+	var paint = false; 
+	var width = document.getElementById('bwidth');
+	var color = document.getElementById('bcolor'); 
+	var L; 
+	
+	xmlns = "http://www.w3.org/2000/svg"; 
+
+	tablet.addEventListener("mousedown", Down); 
+	tablet.addEventListener("mouseup", Up); 
+	tablet.addEventListener("mousemove", Move); 
+
+	function Down(e) 
+	{ 
+		paint = true;
+		
+		L = document.createElementNS(xmlns, "line"); 
+		L.setAttributeNS(null, "x1", e.pageX - tablet.offsetLeft); 
+		L.setAttributeNS(null, "y1", e.pageY - tablet.offsetTop);
+	} 
+
+	function Up(e) 
+	{ 
+		paint = false; 
+	} 
+
+	function Move(e) 
+	{ 
+		if( paint == true ) 
+		{ 
+			L.setAttributeNS(null, "x2", e.pageX - tablet.offsetLeft); 
+			L.setAttributeNS(null, "y2", e.pageY - tablet.offsetTop); 
+			L.setAttributeNS(null, "stroke-width", width.value); 
+			L.setAttributeNS(null, "stroke", color.value); 
+			svg.appendChild(L); 
+			L = document.createElementNS(xmlns, "line"); 
+			L.setAttributeNS(null, "x1", e.pageX - tablet.offsetLeft); 
+			L.setAttributeNS(null, "y1", e.pageY - tablet.offsetTop);
+		} 
+	}
+}
+</script>
+
+</head>
+<body onLoad="init()">
+	<div id="tablet">
+		<svg id="Ssvg" width="600" height="600" style="border: 1px solid black"></svg>
+	</div>
+	<br> 
+	Цвет:
+	<input id="bcolor" type="color" name="bg">
+	Толщина:
+	<select id="bwidth">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+	</select>
+</body>
+</html>

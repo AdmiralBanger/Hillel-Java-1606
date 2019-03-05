@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Web_DB_Table_XMLHTTPRequest/src/index.html&apos; to &apos;table.html&apos;" description="Rename resource &apos;index.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/index.html" name="table.html" stamp="1471117842087" updateReferences="true"/>
+</session>
